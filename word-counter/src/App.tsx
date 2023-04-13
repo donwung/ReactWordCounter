@@ -7,9 +7,12 @@ function App() {
     const [count, setCount] = useState(0)
     const [text, setText] = useState("")
 
+    const [characterCount, setCharacterCount] = useState(0);
+
     const handleOnTextInput = (text: string) => {
         console.log("added text");
         setText(text)
+        setCharacterCount(text.length);
     }
 
     const handleOnTextPaste = () => {
@@ -28,6 +31,9 @@ function App() {
                     <textarea disabled value={text}></textarea>
                 </div>
                 <div>
+                    <h5>
+                        Characters: {characterCount}
+                    </h5>
                     <h5>
                         Vowels:
                     </h5>
