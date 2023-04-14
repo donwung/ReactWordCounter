@@ -7,8 +7,7 @@ function App() {
     const [count, setCount] = useState(0)
     const [text, setText] = useState("")
 
-    const [characterCount, updateCharacterCount] = useState(0);
-
+    const [characterCount, setCharacterCount] = useState(0);
     const [vowelCount, setVowelCount] = useState(0);
     const [wordCount, setWordCount] = useState(0);
 
@@ -44,8 +43,19 @@ function App() {
         setWordCount(count);
     }
 
+    const updateCharacterCount = (text: string) => {
+        let lineBreakCount = 0;
+
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === "\n") {
+                lineBreakCount++;
+            }
+        }
+        setCharacterCount(text.length - lineBreakCount);
+    }
+
     const updateWordStats = (text: string) => {
-        updateCharacterCount(text.length);
+        updateCharacterCount(text);
         updateVowelCount(text);
         updateWordCount(text);
     }
