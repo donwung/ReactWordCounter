@@ -26,12 +26,21 @@ function App() {
 
     const updateWordCount = (text: string) => {
         let count = 0;
+        let startWord = false;
+        let word = "";
+
         for (let i = 0; i < text.length; i++) {
-            if (text[i] === " ") {
-                count++
+            if (text[i] === " " || text[i] === "\n") {
+                startWord = false;
+            } else {
+                if (!startWord) {
+                    startWord = true;
+                    count++;
+                }
+                word = word + text[i];
             }
         }
-        count++
+        console.log(word);
         setWordCount(count);
     }
 
