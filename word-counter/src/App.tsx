@@ -10,6 +10,7 @@ function App() {
     const [characterCount, updateCharacterCount] = useState(0);
 
     const [vowelCount, setVowelCount] = useState(0);
+    const [wordCount, setWordCount] = useState(0);
 
     const updateVowelCount = (text: string) => {
         const vowels = ["a", "e", "i", "o", "u"];
@@ -23,10 +24,21 @@ function App() {
         setVowelCount(count);
     }
 
+    const updateWordCount = (text: string) => {
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === " ") {
+                count++
+            }
+        }
+        count++
+        setWordCount(count);
+    }
+
     const updateWordStats = (text: string) => {
         updateCharacterCount(text.length);
         updateVowelCount(text);
-        
+        updateWordCount(text);
     }
 
     const handleOnTextInput = (text: string) => {
@@ -58,7 +70,7 @@ function App() {
                         Vowels: {vowelCount}
                     </h5>
                     <h5>
-                        Words:
+                        Words: {wordCount}
                     </h5>
                     <h5>
                         Consonants:
