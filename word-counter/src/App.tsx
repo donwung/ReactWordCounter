@@ -7,12 +7,32 @@ function App() {
     const [count, setCount] = useState(0)
     const [text, setText] = useState("")
 
-    const [characterCount, setCharacterCount] = useState(0);
+    const [characterCount, updateCharacterCount] = useState(0);
+
+    const [vowelCount, setVowelCount] = useState(0);
+
+    const updateVowelCount = (text: string) => {
+        const vowels = ["a", "e", "i", "o", "u"];
+        // const vowels = /[aeiou]/; // regex
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+            if (vowels.find(character => character === text[i].toLowerCase())) {
+                count++
+            }
+        }
+        setVowelCount(count);
+    }
+
+    const updateWordStats = (text: string) => {
+        updateCharacterCount(text.length);
+        updateVowelCount(text);
+        
+    }
 
     const handleOnTextInput = (text: string) => {
         console.log("added text");
         setText(text)
-        setCharacterCount(text.length);
+        updateWordStats(text);
     }
 
     const handleOnTextPaste = () => {
@@ -35,7 +55,7 @@ function App() {
                         Characters: {characterCount}
                     </h5>
                     <h5>
-                        Vowels:
+                        Vowels: {vowelCount}
                     </h5>
                     <h5>
                         Words:
