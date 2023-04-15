@@ -9,7 +9,10 @@ function App() {
 
     const [characterCount, setCharacterCount] = useState(0);
     const [vowelCount, setVowelCount] = useState(0);
+    const [consonantCount, setConsonantCount] = useState(0);
     const [wordCount, setWordCount] = useState(0);
+    const [punctuationCount, setPunctuationCount] = useState(0);
+    const [commaCount, setCommaCount] = useState(0);
 
     const updateVowelCount = (text: string) => {
         const vowels = ["a", "e", "i", "o", "u"];
@@ -58,12 +61,47 @@ function App() {
         updateCharacterCount(text);
         updateVowelCount(text);
         updateWordCount(text);
+        updateConsonantCount(text);
+        updatePunctuationCount(text);
+        updateCommaCount(text);
     }
 
     const handleOnTextInput = (text: string) => {
         console.log("added text");
         setText(text)
         updateWordStats(text);
+    }
+
+    const updateConsonantCount = (text: string) => {
+        const consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+            if (consonants.find(character => character === text[i].toLowerCase())) {
+                count++
+            }
+        }
+        setConsonantCount(count);
+    }
+
+    const updatePunctuationCount = (text: string) => {
+        const punctuation = [".", "?", "!", ",", "'", '"', ";", "-", "—", "(", ")", "{", "}", "[", "]", "…", ":"];
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+            if (punctuation.find(character => character === text[i])) {
+                count++
+            }
+        }
+        setPunctuationCount(count);
+    }
+
+    const updateCommaCount = (text: string) => {
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+            if ("," === text[i]) {
+                count++
+            }
+        }
+        setCommaCount(count);
     }
 
     const handleOnTextPaste = () => {
@@ -92,13 +130,13 @@ function App() {
                         Words: {wordCount}
                     </h5>
                     <h5>
-                        Consonants:
+                        Consonants: {consonantCount}
                     </h5>
                     <h5>
-                        Punctuation:
+                        Punctuation: {punctuationCount}
                     </h5>
                     <h5>
-                        Commas:
+                        Commas: {commaCount}
                     </h5>
                     <h5>
                         Uppercase letters:
