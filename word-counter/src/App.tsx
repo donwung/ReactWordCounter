@@ -172,9 +172,6 @@ function App() {
                         Lowercase letters: {lowercaseCharacterCount}
                     </h5>
                     <h5>
-                        Pixels:
-                    </h5>
-                    <h5>
                         Average word length:
                     </h5>
                     <h5>
@@ -182,9 +179,6 @@ function App() {
                     </h5>
                     <h5>
                         Words greater than average word length:
-                    </h5>
-                    <h5>
-                        Characters not in English alphabet:
                     </h5>
                     <h5>
                         Articles:
