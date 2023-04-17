@@ -13,6 +13,7 @@ function App() {
     const [wordCount, setWordCount] = useState(0);
     const [punctuationCount, setPunctuationCount] = useState(0);
     const [commaCount, setCommaCount] = useState(0);
+    const [uppercaseCharacterCount, setUppercaseCharacterCount] = useState(0);
 
     const updateVowelCount = (text: string) => {
         const vowels = ["a", "e", "i", "o", "u"];
@@ -57,6 +58,17 @@ function App() {
         setCharacterCount(text.length - lineBreakCount);
     }
 
+    const updateUppercaseCharacterCount = (text: string) => {
+        let count = 0;
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === text[i].toUpperCase()) {
+                count++;
+            }
+        }
+        setUppercaseCharacterCount(count);
+    }
+
+    // TODO: refactor
     const updateWordStats = (text: string) => {
         updateCharacterCount(text);
         updateVowelCount(text);
@@ -64,6 +76,7 @@ function App() {
         updateConsonantCount(text);
         updatePunctuationCount(text);
         updateCommaCount(text);
+        updateUppercaseCharacterCount(text);
     }
 
     const handleOnTextInput = (text: string) => {
