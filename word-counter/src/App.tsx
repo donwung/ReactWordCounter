@@ -60,8 +60,9 @@ function App() {
 
     const updateUppercaseCharacterCount = (text: string) => {
         let count = 0;
+        // if there exists a change from lower to upper, increase count
         for (let i = 0; i < text.length; i++) {
-            if (text[i] === text[i].toUpperCase()) {
+            if (text[i] !== text[i].toLowerCase()) {
                 count++;
             }
         }
@@ -152,7 +153,7 @@ function App() {
                         Commas: {commaCount}
                     </h5>
                     <h5>
-                        Uppercase letters:
+                        Uppercase letters: {uppercaseCharacterCount}
                     </h5>
                     <h5>
                         Lowercase letters:
