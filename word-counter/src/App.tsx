@@ -15,6 +15,7 @@ function App() {
     const [commaCount, setCommaCount] = useState(0);
     const [uppercaseCharacterCount, setUppercaseCharacterCount] = useState(0);
     const [lowercaseCharacterCount, setLowercaseCharacterCount] = useState(0);
+    const [averageWordLength, setAverageWordLength] = useState("");
 
     const updateVowelCount = (text: string) => {
         const vowels = ["a", "e", "i", "o", "u"];
@@ -44,7 +45,7 @@ function App() {
                 word = word + text[i];
             }
         }
-        console.log(word);
+        // console.log(word);
         setWordCount(count);
     }
 
@@ -81,20 +82,8 @@ function App() {
         setLowercaseCharacterCount(count);
     }
 
-    // TODO: refactor
-    const updateWordStats = (text: string) => {
-        updateCharacterCount(text);
-        updateVowelCount(text);
-        updateWordCount(text);
-        updateConsonantCount(text);
-        updatePunctuationCount(text);
-        updateCommaCount(text);
-        updateUppercaseCharacterCount(text);
-        updateLowercaseCharacterCount(text);
-    }
 
     const handleOnTextInput = (text: string) => {
-        console.log("added text");
         setText(text)
         updateWordStats(text);
     }
@@ -131,6 +120,49 @@ function App() {
         setCommaCount(count);
     }
 
+    const updateAverageWordLength = (text: string) => {
+        let numberOfWords = 0;
+        let totalCharacters = 0;
+        let averageCharacters = 0;
+        let startWord = false;
+        let word = "";
+
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === " " || text[i] === "\n") {
+                startWord = false;
+            } else {
+                if (!startWord) {
+                    startWord = true;
+                    numberOfWords++;
+                }
+                word = word + text[i];
+                if (text[i].match(/^[a-z]+$/i)) {
+                    totalCharacters++
+                }
+            }
+
+        }
+        averageCharacters = totalCharacters / numberOfWords;
+        // console.log(totalCharacters);
+        // console.log(numberOfWords);
+        // console.log(averageCharacters);
+        // console.log(word);
+        setAverageWordLength(averageCharacters.toFixed(3));
+    }
+
+    // TODO: refactor
+    const updateWordStats = (text: string) => {
+        updateCharacterCount(text);
+        updateVowelCount(text);
+        updateWordCount(text);
+        updateAverageWordLength(text);
+        updateConsonantCount(text);
+        updatePunctuationCount(text);
+        updateCommaCount(text);
+        updateUppercaseCharacterCount(text);
+        updateLowercaseCharacterCount(text);
+        updateAverageWordLength(text);
+    }
     const handleOnTextPaste = () => {
         console.log("pasted text");
     }
@@ -172,7 +204,7 @@ function App() {
                         Lowercase letters: {lowercaseCharacterCount}
                     </h5>
                     <h5>
-                        Average word length:
+                        Average word length: {averageWordLength}
                     </h5>
                     <h5>
                         Words shorter than average word length:
