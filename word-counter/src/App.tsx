@@ -16,6 +16,8 @@ function App() {
     const [uppercaseCharacterCount, setUppercaseCharacterCount] = useState(0);
     const [lowercaseCharacterCount, setLowercaseCharacterCount] = useState(0);
     const [averageWordLength, setAverageWordLength] = useState("");
+    const [greaterThanAverageWordLength, setGreaterThanAverageWordLength] = useState(0);
+    const [lessThanAverageWordLength, setLessThanAverageWordLength] = useState(0);
 
     const updateVowelCount = (text: string) => {
         const vowels = ["a", "e", "i", "o", "u"];
@@ -126,10 +128,18 @@ function App() {
         let averageCharacters = 0;
         let startWord = false;
         let word = "";
+        let lessThanCount = 0;
+        let greaterThanCount = 0;
 
         for (let i = 0; i < text.length; i++) {
             if (text[i] === " " || text[i] === "\n") {
                 startWord = false;
+                if (word.length < averageCharacters) {
+                    lessThanCount++
+                } else if(word.length > averageCharacters) {
+                    greaterThanCount++
+                }
+                word = ""
             } else {
                 if (!startWord) {
                     startWord = true;
@@ -140,14 +150,13 @@ function App() {
                     totalCharacters++
                 }
             }
-
+            averageCharacters = totalCharacters / numberOfWords;
         }
-        averageCharacters = totalCharacters / numberOfWords;
-        // console.log(totalCharacters);
-        // console.log(numberOfWords);
-        // console.log(averageCharacters);
-        // console.log(word);
+        console.log(word);
+
         setAverageWordLength(averageCharacters.toFixed(3));
+        setLessThanAverageWordLength(lessThanCount);
+        setGreaterThanAverageWordLength(greaterThanCount);
     }
 
     // TODO: refactor
@@ -162,6 +171,7 @@ function App() {
         updateUppercaseCharacterCount(text);
         updateLowercaseCharacterCount(text);
         updateAverageWordLength(text);
+        // updateWordLengthComparison(text);
     }
     const handleOnTextPaste = () => {
         console.log("pasted text");
@@ -207,10 +217,10 @@ function App() {
                         Average word length: {averageWordLength}
                     </h5>
                     <h5>
-                        Words shorter than average word length:
+                        Words shorter than average word length: {lessThanAverageWordLength}
                     </h5>
                     <h5>
-                        Words greater than average word length:
+                        Words longer than average word length: {greaterThanAverageWordLength}
                     </h5>
                     <h5>
                         Articles:
