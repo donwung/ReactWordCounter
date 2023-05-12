@@ -2,6 +2,9 @@
 A needlessly complex word counter that shows a variety of unnecessary information regarding a body of text.
 
 ### Planned features
+- A slider to determine which stats to show
+- A checkbox to show stats
+
 - Number of Consonants
 - Number of Punctuation
 - Number of Commas
